@@ -1,12 +1,6 @@
-const { generateId, getServerlessSdk } = require('./utils')
-const execSync = require('child_process').execSync
-const path = require('path')
+const { generateId, getServerlessSdk } = require('./lib/utils')
 const axios = require('axios')
 
-// set enough timeout for deployment to finish
-jest.setTimeout(600000)
-
-// the yaml file we're testing against
 const instanceYaml = {
   org: 'orgDemo',
   app: 'appDemo',
@@ -20,16 +14,18 @@ const instanceYaml = {
   }
 }
 
-// get credentials from process.env but need to init empty credentials object
 const credentials = {
-  tencent: {}
+  tencent: {
+    SecretId: process.env.TENCENT_SECRET_ID,
+    SecretKey: process.env.TENCENT_SECRET_KEY
+  }
 }
 
 // get serverless construct sdk
 const sdk = getServerlessSdk(instanceYaml.org)
 
 it('should successfully deploy thinkphp app', async () => {
-  const instance = await sdk.deploy(instanceYaml, { tencent: {} })
+  const instance = await sdk.deploy(instanceYaml, credentials)
 
   expect(instance).toBeDefined()
   expect(instance.instanceName).toEqual(instanceYaml.name)
