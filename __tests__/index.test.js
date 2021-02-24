@@ -4,7 +4,7 @@ const axios = require('axios')
 const instanceYaml = {
   org: 'orgDemo',
   app: 'appDemo',
-  component: 'thinkphp',
+  component: 'thinkphp@dev',
   name: `thinkphp-integration-tests-${generateId()}`,
   stage: 'dev',
   inputs: {
