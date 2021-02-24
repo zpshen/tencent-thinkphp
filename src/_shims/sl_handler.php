@@ -148,7 +148,6 @@ function handler($event, $context)
 
     $_SERVER['REQUEST_METHOD'] = $event->httpMethod;
 
-
     $_POST = [];
 
     // init body
@@ -246,4 +245,3 @@ function getAppName($path)
 
     return '';
 }
-
